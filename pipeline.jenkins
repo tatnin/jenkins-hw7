@@ -14,8 +14,8 @@ pipeline {
         }
         stage('Docker Image push') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', passwordVariable: 'dockerhub-pwd', usernameVariable: 'dockerhub-user')]) {
-                    sh "docker login -u ${dockerhub-user} -p ${dockerhub-pwd}"
+                withCredentials([string(credentialsId: 'dockerhub_pass', variable: 'dockerhub_pass')]) {
+                    sh "docker login -u kosto4ka -p ${dockerhub_pass}"
                 }
                 sh 'docker push kosto4ka/hw7-image:$BUILD_NUMBER'
             }
